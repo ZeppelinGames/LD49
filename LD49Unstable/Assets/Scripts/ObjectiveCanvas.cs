@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class ObjectiveCanvas : MonoBehaviour
 {
+    public GameStateManager gameState;
+    public UnityEvent gameWinEvents;
+
     public TextMeshProUGUI currObjText;
     public TextMeshProUGUI mainObjText;
     public TextMeshProUGUI subObj1Text;
@@ -23,6 +27,19 @@ public class ObjectiveCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timeRemaining <= 0)
+        {
+            gameState.canBlowup = false;
+            Debug.Log("You didnt die");
+
+            SetObjectives(baseCurrObjText,
+                "GO HOME",
+                "PLEASE DON'T GO NEAR A NUCLEAR REACTOR AGAIN",
+                "WHERE DID YOU EVEN GET YOUR LICENSE FROM");
+
+            gameWinEvents.Invoke();
+        }
+
         currObjText.text = baseCurrObjText + " " + GetTimeString();
         timeRemaining -= Time.deltaTime;
     }

@@ -23,10 +23,12 @@ public class GameStateManager : MonoBehaviour
     private float powerTarget = 1;
 
     private float coolingOffset = 0.5f;
-    private float powerOffset = 0.2f; 
+    private float powerOffset = 0.2f;
 
     private int temperatureTarget = 1;
     private float tempValue = 1;
+
+    [HideInInspector] public bool canBlowup = true;
 
     private void Start()
     {
@@ -44,7 +46,7 @@ public class GameStateManager : MonoBehaviour
         coolingTargetSlider.value = coolingTarget;
         powerTargetSlider.value = powerTarget;
 
-        coolingTarget = (Mathf.Sin((Time.time + coolingOffset) / Random.Range(90,100)) * 5 + 5);
+        coolingTarget = (Mathf.Sin((Time.time + coolingOffset) / Random.Range(90, 100)) * 5 + 5);
         powerTarget = (Mathf.Sin((Time.time + powerOffset) / Random.Range(90, 100)) * 5 + 5);
 
         coolingTarget = Mathf.Clamp(coolingTarget, 1, coolingSlider.maxValue);
@@ -66,17 +68,24 @@ public class GameStateManager : MonoBehaviour
             }
         }
 
-        temperatureTarget = Mathf.RoundToInt((coolingDist * 4) + (powerDist * 4) + (offPanelCount*3));
+        temperatureTarget = Mathf.RoundToInt((coolingDist * 4) + (powerDist * 4) + (offPanelCount * 3));
 
         tempValue = Mathf.MoveTowards(tempValue, temperatureTarget, Time.deltaTime);
         tempValue = Mathf.Clamp(tempValue, 1, temperatureSlider.maxValue);
         temperatureSlider.value = Mathf.RoundToInt(tempValue);
 
-        if (temperatureSlider.value >= temperatureSlider.maxValue)
+        if (canBlowup)
         {
-            Debug.Log("Ya dead");
-            //BLOW UP
-            reactorBlowUp.Invoke();
+            if (temperatureSlider.value >= temperatureSlider.maxValue)
+            {
+                Debug.Log("Ya dead");
+                //BLOW UP
+                reactorBlowUp.Invoke();
+            }
+        }
+        else
+        {
+            temperatureTarget = 1;
         }
     }
 }
