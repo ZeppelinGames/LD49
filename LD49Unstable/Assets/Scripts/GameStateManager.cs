@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class GameStateManager : MonoBehaviour
 {
     public UnityEvent reactorBlowUp;
+    [HideInInspector] public bool dead = false;
 
     public Slider coolingSlider;
     public Slider powerSlider;
@@ -68,7 +69,7 @@ public class GameStateManager : MonoBehaviour
             }
         }
 
-        temperatureTarget = Mathf.RoundToInt((coolingDist * 4) + (powerDist * 4) + (offPanelCount * 3));
+        temperatureTarget = Mathf.RoundToInt((coolingDist * 5) + (powerDist * 5) + (offPanelCount * 3));
 
         tempValue = Mathf.MoveTowards(tempValue, temperatureTarget, Time.deltaTime);
         tempValue = Mathf.Clamp(tempValue, 1, temperatureSlider.maxValue);
@@ -80,6 +81,7 @@ public class GameStateManager : MonoBehaviour
             {
                 Debug.Log("Ya dead");
                 //BLOW UP
+                dead = true;
                 reactorBlowUp.Invoke();
             }
         }

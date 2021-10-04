@@ -18,26 +18,23 @@ public class ObjectiveCanvas : MonoBehaviour
     private string baseCurrObjText = "CURRENT OBJECTIVE";
     public float timeRemaining = 300;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (timeRemaining <= 0)
         {
-            gameState.canBlowup = false;
-            Debug.Log("You didnt die");
+            if (!gameState.dead)
+            {
+                gameState.canBlowup = false;
+                Debug.Log("You didnt die");
 
-            SetObjectives(baseCurrObjText,
-                "GO HOME",
-                "PLEASE DON'T GO NEAR A NUCLEAR REACTOR AGAIN",
-                "WHERE DID YOU EVEN GET YOUR LICENSE FROM");
+                SetObjectives(baseCurrObjText,
+                    "GO HOME",
+                    "PLEASE DON'T GO NEAR A NUCLEAR REACTOR AGAIN",
+                    "WHERE DID YOU EVEN GET YOUR LICENSE FROM");
 
-            gameWinEvents.Invoke();
+                gameWinEvents.Invoke();
+            }
         }
 
         currObjText.text = baseCurrObjText + " " + GetTimeString();
