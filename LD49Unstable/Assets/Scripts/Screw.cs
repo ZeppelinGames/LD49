@@ -13,6 +13,7 @@ public class Screw : MonoBehaviour
 
     private void Start()
     {
+
         rig = GetComponent<Rigidbody>();
         rig.isKinematic = true;
 
@@ -38,5 +39,12 @@ public class Screw : MonoBehaviour
         screwedIn = false;
         rig.isKinematic = false;
         rig.AddForce(transform.right * Random.Range(3,10) + Vector3.up);
+    }
+
+    public void ResetScrew()
+    {
+        screwedIn = true;
+        rig.isKinematic = true;
+        screwLevel = 1;
     }
 }

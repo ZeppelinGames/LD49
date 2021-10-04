@@ -8,9 +8,9 @@ public class FixPanel : MonoBehaviour
     public List<Screw> screws = new List<Screw>();
 
     private Rigidbody rig;
-    private bool secured = true;
+    [HideInInspector] public bool secured = true;
 
-    [HideInInspector] private bool heldInPlace = false;
+    private float placedTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,20 +24,36 @@ public class FixPanel : MonoBehaviour
     {
         if (secured)
         {
-            bool allUnscrewed = true;
+            List<Screw> removeScrews = new List<Screw>();
             foreach (Screw screw in screws)
             {
-                if (screw.screwedIn) { allUnscrewed = false; }
+                if (!screw.screwedIn)
+                {
+                    removeScrews.Add(screw);
+                }
+            }
+            foreach (Screw removeScrew in removeScrews)
+            {
+                screws.Remove(removeScrew);
             }
 
-            if (allUnscrewed)
+            if (screws.Count == 0)
             {
-                if (!heldInPlace)
+                if (Time.time - placedTime >= 3)
                 {
                     BreakPanel();
                 }
             }
+            else
+            {
+                ResetPanel(this.transform.parent);
+            }
         }
+    }
+
+    public void PlacedBack()
+    {
+        placedTime = Time.time;
     }
 
     void BreakPanel()
