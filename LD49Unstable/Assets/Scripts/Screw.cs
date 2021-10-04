@@ -7,13 +7,12 @@ public class Screw : MonoBehaviour
 {
     public bool screwedIn = true;
 
-    private Rigidbody rig;
+    [HideInInspector] public Rigidbody rig;
     private float unscrewSpeed = 0.1f;
     private float screwLevel = 1;
 
     private void Start()
     {
-
         rig = GetComponent<Rigidbody>();
         rig.isKinematic = true;
 
@@ -43,8 +42,8 @@ public class Screw : MonoBehaviour
 
     public void ResetScrew()
     {
+        screwLevel = Random.Range(0.8f, 1);
         screwedIn = true;
         rig.isKinematic = true;
-        screwLevel = 1;
     }
 }

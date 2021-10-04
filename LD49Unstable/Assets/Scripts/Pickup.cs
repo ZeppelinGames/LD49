@@ -29,7 +29,6 @@ public class Pickup : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, pickLayers))
         {
             hitObj = hit.transform.gameObject;
-            Debug.Log(hitObj.name);
         }
 
         if (hitObj != null)
@@ -38,6 +37,8 @@ public class Pickup : MonoBehaviour
             {
                 if (hitObj.GetComponent<Screw>())
                 {
+                    hitObj.GetComponent<Screw>().screwedIn = false;
+
                     if (!heldScrews.Contains(hitObj.GetComponent<Screw>()))
                     {
                         heldScrews.Add(hitObj.GetComponent<Screw>());
@@ -90,9 +91,12 @@ public class Pickup : MonoBehaviour
                             PanelTarget pt = hitObj.GetComponent<PanelTarget>();
                             if (pt.panel != null && pt.panel.screws.Count < 4)
                             {
-                                heldScrews[0].ResetScrew();
+                                Debug.Log("Adding " + heldScrews[0].name);
+                                heldScrews[0].gameObject.SetActive(true);
                                 hitObj.GetComponent<PanelTarget>().panel.screws.Add(heldScrews[0]);
+                                heldScrews[0].ResetScrew();
                                 heldScrews.RemoveAt(0);
+
                             }
                         }
                     }

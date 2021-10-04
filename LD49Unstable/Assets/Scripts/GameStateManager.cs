@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameStateManager : MonoBehaviour
 {
+    public UnityEvent reactorBlowUp;
+
     public Slider coolingSlider;
     public Slider powerSlider;
     public Slider temperatureSlider;
@@ -73,6 +76,7 @@ public class GameStateManager : MonoBehaviour
         {
             Debug.Log("Ya dead");
             //BLOW UP
+            reactorBlowUp.Invoke();
         }
     }
 }

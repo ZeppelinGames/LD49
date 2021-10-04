@@ -19,8 +19,8 @@ public class PanelTarget : MonoBehaviour
 
     public void SetPanel(FixPanel fixPanel)
     {
-        this.panel = fixPanel;
         fixPanel.ResetPanel(transform);
         fixPanel.PlacedBack();
+        this.panel = fixPanel;
     }
 }
