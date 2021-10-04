@@ -20,9 +20,11 @@ public class Screw : MonoBehaviour
         unscrewSpeed = Random.Range(0.05f, 0.15f);
     }
 
-    void Update() {
-        if(screwedIn) {
-            screwLevel -= Random.Range(-0.5f,1f) * unscrewSpeed * Time.deltaTime;
+    void Update()
+    {
+        if (screwedIn)
+        {
+            screwLevel -= Random.Range(-0.5f, 1f) * unscrewSpeed * Time.deltaTime;
             screwLevel = Mathf.Clamp01(screwLevel);
 
             if (screwLevel <= 0.1f)

@@ -5,10 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class FixPanel : MonoBehaviour
 {
-    public Screw[] screws;
+    public List<Screw> screws = new List<Screw>();
 
     private Rigidbody rig;
     private bool secured = true;
+
+    [HideInInspector] private bool heldInPlace = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,10 @@ public class FixPanel : MonoBehaviour
 
             if (allUnscrewed)
             {
-                BreakPanel();
+                if (!heldInPlace)
+                {
+                    BreakPanel();
+                }
             }
         }
     }
@@ -40,5 +45,15 @@ public class FixPanel : MonoBehaviour
         secured = false;
         rig.isKinematic = false;
         rig.AddForce(transform.right * Random.Range(10, 15) + Vector3.up);
+
+        CameraShake.instance.AddShakeTime(0.5f);
+    }
+
+    public void ResetPanel(Transform setTransform)
+    {
+        secured = true;
+        rig.isKinematic = true;
+        transform.position = Vector3.zero;
+        transform.rotation = setTransform.rotation;
     }
 }

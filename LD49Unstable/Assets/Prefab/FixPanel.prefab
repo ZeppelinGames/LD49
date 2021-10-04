@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 6347541792947553530}
   - component: {fileID: 6347541792947553531}
   - component: {fileID: 6457397125620297978}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FixPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,3 +154,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c5342b2d3f97e43b381efa0ec4f2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screws: []

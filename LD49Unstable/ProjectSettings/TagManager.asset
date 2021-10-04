@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - PanelTarget
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Cable
   - Player
   - WorldUI
-  - 
-  - 
+  - Pickup
+  - Target
   - 
   - 
   - 

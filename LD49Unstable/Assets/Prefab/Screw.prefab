@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 2711729355472717953}
   - component: {fileID: 1857597365891608139}
   - component: {fileID: 2280138195561401955}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Screw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76100198347c9a245bab0a61f65a566b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rig: {fileID: 0}
-  screwLevel: 1
-  unscrewSpeed: 0.1
   screwedIn: 1
